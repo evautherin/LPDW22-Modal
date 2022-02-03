@@ -8,9 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showModal = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text("Hello, world!")
+                .padding()
+            Button("More") {
+                showModal = true
+            }
+        }.sheet(isPresented: $showModal) {
+            ModalView(showModal: $showModal)
+        }
+    }
+}
+
+struct ModalView: View {
+    @Binding var showModal: Bool
+    
+    var body: some View {
+        VStack {
+            Text("Hello, again")
+                .padding()
+            Button("OK") {
+                showModal = false
+            }
+        }
     }
 }
 
